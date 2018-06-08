@@ -8,7 +8,7 @@
 int main()
 {
     FILE *fp;
-    int input, counter = 0;
+    int input = 100, counter = 0;
     char buf[BUF_SIZE], kpath[BUF_SIZE];
     const char *lattices[] = {
         "CUB\tCubic",                       // Perfect
@@ -42,26 +42,34 @@ int main()
         "mclc",
         "tri",
     };
-    for (int i = 0; i < NUMBERS_OF_LATTICES; i++)
+    while(0 != input)
     {
-        printf("%d: %s\n", i + 1, lattices[i]);
+        for (int i = 0; i < NUMBERS_OF_LATTICES; i++)
+        {
+            printf("%d: %s\n", i + 1, lattices[i]);
+        }
+        printf("\nSelect the number correspond with the lattice and press enter: ");
+        scanf("%d", &input);
+        if(0 == input)
+        {
+            break;
+        }
+        printf("\nCurrent lattice that is chosen: %s\n", lattices[input - 1]);
+        if ((fp = fopen(shortNames[input - 1], "r")) == NULL)
+        {
+            perror("Open file: ");
+            return 1;
+        }
+        printf("\n----------------------------------------------\n");
+        while (fgets(buf, sizeof(buf), fp) != NULL)
+        {
+            buf[strlen(buf)] = '\0';
+            printf("%s", buf);
+            counter++;
+        }
+        printf("\n----------------------------------------------\n");
     }
-    printf("\nSelect the number correspond with the lattice and press enter: ");
-    scanf("%d", &input);
-    printf("\nCurrent lattice that is chosen: %s\n", lattices[input - 1]);
-    if ((fp = fopen(shortNames[input - 1], "r")) == NULL)
-    {
-        perror("Open file: ");
-        return 1;
-    }
-    printf("\n----------------------------------------------\n");
-    while (fgets(buf, sizeof(buf), fp) != NULL)
-    {
-        buf[strlen(buf)] = '\0';
-        printf("%s", buf);
-        counter++;
-    }
-    printf("\n----------------------------------------------\n");
     fclose(fp);
+    printf("Goodbye! :>\n");
     return 0;
 }
