@@ -11,20 +11,20 @@ int main()
     int input = 100, counter = 0;
     char buf[BUF_SIZE], kpath[BUF_SIZE];
     const char *lattices[] = {
-        "CUB\tCubic",                       // Perfect
-        "FCC\tFace-centered Cubic",         // Perfect
-        "BCC\tBody-centered Cubic",         // Perfect
-        "TET\tTetragonal",                  // Perfect
-        "BCT\tBody-centered Tetragonal",    //
-        "ORC\tOrthorhombic",                // Perfect
-        "ORCF\tFace-centered Orthorhombic", //
-        "ORCI\tBody-centered Orthorhombic", //
-        "ORCC\tC-centered Orthorhombic",    // Perfect
-        "HEX\tHexagonal",                   // Perfect
-        "RHL\tRhombohedral",                //
-        "MCL\tMonoclinic",                  //
-        "MCLC\tC-centered Monoclinic",      //
-        "TRI\tTriclinic",                   //
+        "CUB - Cubic",                       // Perfect
+        "FCC - Face-centered Cubic",         // Perfect
+        "BCC - Body-centered Cubic",         // Perfect
+        "TET - Tetragonal",                  // Perfect
+        "BCT - Body-centered Tetragonal",    //
+        "ORC - Orthorhombic",                // Perfect
+        "ORCF - Face-centered Orthorhombic", //
+        "ORCI - Body-centered Orthorhombic", //
+        "ORCC - C-centered Orthorhombic",    // Perfect
+        "HEX - Hexagonal",                   // Perfect
+        "RHL - Rhombohedral",                //
+        "MCL - Monoclinic",                  //
+        "MCLC - C-centered Monoclinic",      //
+        "TRI - Triclinic",                   //
     };
     const char *shortNames[] = {
         "cub",
@@ -42,7 +42,7 @@ int main()
         "mclc",
         "tri",
     };
-    while(0 != input)
+    while (0 != input)
     {
         for (int i = 0; i < NUMBERS_OF_LATTICES; i++)
         {
@@ -50,7 +50,7 @@ int main()
         }
         printf("\nSelect the number correspond with the lattice and press enter: ");
         scanf("%d", &input);
-        if(0 == input)
+        if (0 == input)
         {
             break;
         }
