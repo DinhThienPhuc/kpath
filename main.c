@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 #define NUMBERS_OF_LATTICES 14
 #define BUF_SIZE 4096
@@ -27,35 +28,43 @@ int main()
         "TRI - Triclinic",                   //
     };
     const char *shortNames[] = {
-        "cub",
-        "fcc",
-        "bcc",
-        "tet",
-        "bct",
-        "orc",
-        "orcf",
-        "orci",
-        "orcc",
-        "hex",
-        "rhl",
-        "mcl",
-        "mclc",
-        "tri",
+        "lattices/cub",
+        "lattices/fcc",
+        "lattices/bcc",
+        "lattices/tet",
+        "lattices/bct",
+        "lattices/orc",
+        "lattices/orcf",
+        "lattices/orci",
+        "lattices/orcc",
+        "lattices/hex",
+        "lattices/rhl",
+        "lattices/mcl",
+        "lattices/mclc",
+        "lattices/tri",
     };
     while (0 != input)
     {
+        const char *fname = shortNames[input - 1];
+
         for (int i = 0; i < NUMBERS_OF_LATTICES; i++)
         {
             printf("%d: %s\n", i + 1, lattices[i]);
         }
-        printf("\nSelect the number correspond with the lattice and press enter: ");
+        printf("\nSelect the number correspond with the lattice and press enter. Hit 0 to quit: ");
         scanf("%d", &input);
-        if (0 == input)
+        if (input <= 0 || input > NUMBERS_OF_LATTICES)
         {
-            break;
+            // fclose(fp);
+            if (fp)
+            {
+                fclose(fp);
+            }
+            printf("Goodbye! :>\n");
+            return 0;
         }
         printf("\nCurrent lattice that is chosen: %s\n", lattices[input - 1]);
-        if ((fp = fopen(shortNames[input - 1], "r")) == NULL)
+        if ((fp = fopen(fname, "r")) == NULL)
         {
             perror("Open file: ");
             return 1;
@@ -69,7 +78,6 @@ int main()
         }
         printf("\n----------------------------------------------\n");
     }
-    fclose(fp);
-    printf("Goodbye! :>\n");
+
     return 0;
 }
